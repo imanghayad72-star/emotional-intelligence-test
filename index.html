@@ -1,0 +1,1586 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اختبار الذكاء العاطفي (نسخة تدريبية مستوحاة من MSCEIT)</title>
+<style>
+:root {
+    --bg:#0b1220;
+    --card:#0f172a;
+    --ink:#e5e7eb;
+    --muted:#a1a1aa;
+    --accent:#38bdf8;
+    --ok:#22c55e;
+    --warn:#f59e0b;
+    --bad:#ef4444;
+    --border:#1f2937;
+}
+* { box-sizing: border-box; font-family: "Tahoma","Segoe UI","Noto Naskh Arabic","Cairo","Geeza Pro",system-ui,sans-serif; font-size: 18px; line-height: 1.7; }
+body { background: var(--bg); color: var(--ink); margin:0; }
+.container { max-width: 980px; margin: 24px auto; padding: 0 16px; }
+.header { background: var(--card); border:1px solid var(--border); border-radius: 18px; padding: 22px; margin-bottom: 16px; }
+.header h1 { margin: 0 0 6px; font-size: 28px; }
+.header p { margin: 4px 0; color: var(--muted); line-height: 1.7; }
+.alert { background:#e0f2fe; border:1px dashed #7dd3fc; padding:10px 12px; border-radius:12px; margin-top:8px; color:#075985; font-size:14px; }
+.sec { background: var(--card); border:1px solid var(--border); border-radius: 16px; padding: 16px; margin: 16px 0; }
+.sec h2 { margin:0 0 12px; font-size: 22px; color:#93c5fd; }
+.question { border-top:1px solid var(--border); padding: 12px 0; }
+.question:first-of-type { border-top:0; }
+.qhead { display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; }
+.qnum { display:inline-flex; width:32px; height:32px; align-items:center; justify-content:center; background:#0b1220; border:1px solid var(--border); border-radius:10px; font-weight:800; color:#cbd5e1; }
+.qtext { font-weight:600; }
+.options { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+.option { display:flex; align-items:center; gap:10px; padding:14px; border:1px solid var(--border); border-radius:14px; background:#111827; color:var(--ink); }
+.option input[type=radio] { transform: scale(1.4); accent-color: var(--accent); }
+.badge { display:inline-flex; align-items:center; justify-content:center; min-width:26px; height:26px; border-radius:8px; background:#0b1220; border:1px solid #334155; color:#cbd5e1; font-size:13px; font-weight:800; }
+.footer { display:flex; gap:12px; align-items:center; justify-content:space-between; margin: 20px 0; }
+.btn { background:var(--accent); color:#001824; border:none; border-radius:12px; padding:12px 18px; font-size:16px; cursor:pointer; font-weight:800; }
+.btn.secondary { background:#334155; color:#e5e7eb; }
+.results { background: var(--card); border:1px solid var(--border); border-radius: 16px; padding: 16px; margin: 16px 0; display:none; }
+.kpis { display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+.kpi { border:1px solid var(--border); border-radius:12px; padding:10px; text-align:center; }
+.kpi .label { color: var(--muted); font-size:12px; }
+.kpi .value { font-size:22px; font-weight:800; }
+.kpi.ok { background:#052e1a; border-color:#064e3b; }
+.kpi.mid { background:#3a2e05; border-color:#b45309; }
+.kpi.bad { background:#3b0a0a; border-color:#7f1d1d; }
+.note { font-size:14px; color:var(--muted); }
+.legend { display:flex; gap:12px; align-items:center; margin-top:8px; font-size:14px; }
+.legend span { display:inline-block; padding:4px 8px; border-radius:8px; border:1px solid var(--border); }
+.small { font-size: 13px; color: var(--muted); }
+.admin { display:none; margin-top:10px; }
+.admin .grid { display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:6px; }
+.admin .row { display:flex; gap:6px; align-items:center; }
+.alert-inline { font-size:12px; color:#be123c; }
+</style>
+
+<style>
+/* تحسين العرض على الجوال — عمود واحد وخطوات لمس أسهل */
+@media (max-width: 1024px) {
+  .options { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .container { padding: 0 12px !important; }
+  .qhead { flex-direction: column; gap: 6px !important; }
+  .btn { width: 100%; }
+  .footer { flex-direction: column; gap: 10px; align-items: stretch; }
+  .option { padding: 16px !important; }
+  .option input[type=radio] { transform: scale(1.5) !important; }
+  .badge { min-width: 30px; height: 30px; font-size: 14px; }
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>اختبار الذكاء العاطفي <span class="small">— نسخة تدريبية مستوحاة من MSCEIT</span></h1>
+    <p>أجب عن الأسئلة التالية باختيار الخيار الأنسب (أ/ب/ج/د). عند الإنهاء، اضغط <b>عرض النتائج</b> لترى مجموعك العام وتحليل المجالات الأربعة: <b>إدراك</b>، <b>استخدام</b>، <b>فهم</b>، <b>إدارة</b>.</p>
+    
+    <div class="small">تلميح: اضغط <b>Alt + M</b> لفتح لوحة "إدخال مفتاح الإجابة" داخل الصفحة (للاستخدام المحلي)، ثم احفظ الملف بعد التعديل.</div>
+  </div>
+
+  <form id="quiz">
+    
+    <section class="sec">
+        <h2>إدراك العواطف</h2>
+        
+    <div class="question" data-qnum="1" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">1</span>
+            <span class="qtext">شخص يبتسم ابتسامة واسعة مع عيون ضيقة</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q1" value="أ" required>
+            <span class="badge">أ</span> غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q1" value="ب" required>
+            <span class="badge">ب</span> فرح
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q1" value="ج" required>
+            <span class="badge">ج</span> ملل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q1" value="د" required>
+            <span class="badge">د</span> حزن
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="2" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">2</span>
+            <span class="qtext">شخص عابس، كتفاه للأسفل وصوته منخفض</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q2" value="أ" required>
+            <span class="badge">أ</span> توتر
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q2" value="ب" required>
+            <span class="badge">ب</span> سعادة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q2" value="ج" required>
+            <span class="badge">ج</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q2" value="د" required>
+            <span class="badge">د</span> اندهاش
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="3" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">3</span>
+            <span class="qtext">اللون الأحمر غالبًا يرتبط بـ</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q3" value="أ" required>
+            <span class="badge">أ</span> هدوء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q3" value="ب" required>
+            <span class="badge">ب</span> غضب/حماس
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q3" value="ج" required>
+            <span class="badge">ج</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q3" value="د" required>
+            <span class="badge">د</span> لا مبالاة
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="4" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">4</span>
+            <span class="qtext">طفل يبكي ويبتسم في الوقت ذاته</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q4" value="أ" required>
+            <span class="badge">أ</span> فرح
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q4" value="ب" required>
+            <span class="badge">ب</span> مشاعر مختلطة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q4" value="ج" required>
+            <span class="badge">ج</span> غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q4" value="د" required>
+            <span class="badge">د</span> خوف
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="5" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">5</span>
+            <span class="qtext">موسيقى سريعة بإيقاع قوي</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q5" value="أ" required>
+            <span class="badge">أ</span> نشاط
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q5" value="ب" required>
+            <span class="badge">ب</span> هدوء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q5" value="ج" required>
+            <span class="badge">ج</span> خوف
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q5" value="د" required>
+            <span class="badge">د</span> ملل
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="6" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">6</span>
+            <span class="qtext">نظرة شخص حادة مع قبضة مشدودة</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q6" value="أ" required>
+            <span class="badge">أ</span> فرح
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q6" value="ب" required>
+            <span class="badge">ب</span> غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q6" value="ج" required>
+            <span class="badge">ج</span> دهشة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q6" value="د" required>
+            <span class="badge">د</span> ملل
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="7" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">7</span>
+            <span class="qtext">شخص جالس، رأسه للأرض، أنفاسه ثقيلة</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q7" value="أ" required>
+            <span class="badge">أ</span> استرخاء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q7" value="ب" required>
+            <span class="badge">ب</span> توتر
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q7" value="ج" required>
+            <span class="badge">ج</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q7" value="د" required>
+            <span class="badge">د</span> ثقة
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="8" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">8</span>
+            <span class="qtext">اللون الأزرق الداكن غالبًا يوحي بـ</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q8" value="أ" required>
+            <span class="badge">أ</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q8" value="ب" required>
+            <span class="badge">ب</span> غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q8" value="ج" required>
+            <span class="badge">ج</span> اندهاش
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q8" value="د" required>
+            <span class="badge">د</span> لا مبالاة
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="9" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">9</span>
+            <span class="qtext">نبرة صوت عالية وسريعة قد تشير إلى</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q9" value="أ" required>
+            <span class="badge">أ</span> توتر أو غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q9" value="ب" required>
+            <span class="badge">ب</span> ملل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q9" value="ج" required>
+            <span class="badge">ج</span> فرح
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q9" value="د" required>
+            <span class="badge">د</span> ارتباك
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="10" data-section="إدراك العواطف">
+        <div class="qhead">
+            <span class="qnum">10</span>
+            <span class="qtext">مشهد غروب مع موسيقى حزينة يوحي بـ</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q10" value="أ" required>
+            <span class="badge">أ</span> راحة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q10" value="ب" required>
+            <span class="badge">ب</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q10" value="ج" required>
+            <span class="badge">ج</span> طاقة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q10" value="د" required>
+            <span class="badge">د</span> فرح
+        </label>
+        </div>
+    </div>
+    
+    </section>
+    
+
+    <section class="sec">
+        <h2>استخدام العواطف</h2>
+        
+    <div class="question" data-qnum="11" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">11</span>
+            <span class="qtext">أي شعور يساعدك على كتابة قصة إبداعية؟</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q11" value="أ" required>
+            <span class="badge">أ</span> الفضول
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q11" value="ب" required>
+            <span class="badge">ب</span> الغضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q11" value="ج" required>
+            <span class="badge">ج</span> لا مبالاة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q11" value="د" required>
+            <span class="badge">د</span> خوف
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="12" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">12</span>
+            <span class="qtext">لاتخاذ قرار مالي مهم</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q12" value="أ" required>
+            <span class="badge">أ</span> الحماس الزائد
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q12" value="ب" required>
+            <span class="badge">ب</span> الهدوء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q12" value="ج" required>
+            <span class="badge">ج</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q12" value="د" required>
+            <span class="badge">د</span> غضب
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="13" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">13</span>
+            <span class="qtext">الدهشة غالبًا تدفع إلى</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q13" value="أ" required>
+            <span class="badge">أ</span> التعلم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q13" value="ب" required>
+            <span class="badge">ب</span> الانطواء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q13" value="ج" required>
+            <span class="badge">ج</span> تجاهل التفاصيل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q13" value="د" required>
+            <span class="badge">د</span> القلق
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="14" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">14</span>
+            <span class="qtext">للتحفيز الرياضي</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q14" value="أ" required>
+            <span class="badge">أ</span> ملل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q14" value="ب" required>
+            <span class="badge">ب</span> حماس
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q14" value="ج" required>
+            <span class="badge">ج</span> خوف
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q14" value="د" required>
+            <span class="badge">د</span> حزن
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="15" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">15</span>
+            <span class="qtext">لحل مشكلة منطقية</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q15" value="أ" required>
+            <span class="badge">أ</span> هدوء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q15" value="ب" required>
+            <span class="badge">ب</span> فرح مفرط
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q15" value="ج" required>
+            <span class="badge">ج</span> غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q15" value="د" required>
+            <span class="badge">د</span> لا مبالاة
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="16" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">16</span>
+            <span class="qtext">عند الحاجة للابتكار التقني، أي شعور أنسب؟</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q16" value="أ" required>
+            <span class="badge">أ</span> فضول
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q16" value="ب" required>
+            <span class="badge">ب</span> إحباط
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q16" value="ج" required>
+            <span class="badge">ج</span> ملل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q16" value="د" required>
+            <span class="badge">د</span> غضب
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="17" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">17</span>
+            <span class="qtext">أي عاطفة تضعف التفكير الواقعي؟</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q17" value="أ" required>
+            <span class="badge">أ</span> قلق بسيط
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q17" value="ب" required>
+            <span class="badge">ب</span> غضب عارم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q17" value="ج" required>
+            <span class="badge">ج</span> فضول
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q17" value="د" required>
+            <span class="badge">د</span> حماس معتدل
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="18" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">18</span>
+            <span class="qtext">السعادة المعتدلة تساعد في</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q18" value="أ" required>
+            <span class="badge">أ</span> اتخاذ قرارات تفاعلية
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q18" value="ب" required>
+            <span class="badge">ب</span> تجنب التعاون
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q18" value="ج" required>
+            <span class="badge">ج</span> العزلة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q18" value="د" required>
+            <span class="badge">د</span> فقدان الحافز
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="19" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">19</span>
+            <span class="qtext">القلق البسيط قبل الامتحان قد يؤدي إلى</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q19" value="أ" required>
+            <span class="badge">أ</span> تركيز
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q19" value="ب" required>
+            <span class="badge">ب</span> انهيار
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q19" value="ج" required>
+            <span class="badge">ج</span> لا مبالاة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q19" value="د" required>
+            <span class="badge">د</span> كسل
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="20" data-section="استخدام العواطف">
+        <div class="qhead">
+            <span class="qnum">20</span>
+            <span class="qtext">الحزن الخفيف أحيانًا يزيد من</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q20" value="أ" required>
+            <span class="badge">أ</span> الانتباه للتفاصيل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q20" value="ب" required>
+            <span class="badge">ب</span> الإهمال
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q20" value="ج" required>
+            <span class="badge">ج</span> الاسترخاء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q20" value="د" required>
+            <span class="badge">د</span> سرعة الإنجاز
+        </label>
+        </div>
+    </div>
+    
+    </section>
+    
+
+    <section class="sec">
+        <h2>فهم العواطف</h2>
+        
+    <div class="question" data-qnum="21" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">21</span>
+            <span class="qtext">قلق قبل عرض → ارتياح بعده</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q21" value="أ" required>
+            <span class="badge">أ</span> تطور طبيعي
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q21" value="ب" required>
+            <span class="badge">ب</span> إنكار
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q21" value="ج" required>
+            <span class="badge">ج</span> سوء فهم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q21" value="د" required>
+            <span class="badge">د</span> خلط
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="22" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">22</span>
+            <span class="qtext">إحباط يتحول إلى يأس طويل الأمد</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q22" value="أ" required>
+            <span class="badge">أ</span> انتقال
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q22" value="ب" required>
+            <span class="badge">ب</span> تضخيم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q22" value="ج" required>
+            <span class="badge">ج</span> تراكم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q22" value="د" required>
+            <span class="badge">د</span> إدارة
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="23" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">23</span>
+            <span class="qtext">أي تسلسل منطقي؟</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q23" value="أ" required>
+            <span class="badge">أ</span> دهشة → خوف → حذر
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q23" value="ب" required>
+            <span class="badge">ب</span> سعادة → قلق → نوم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q23" value="ج" required>
+            <span class="badge">ج</span> غضب → فرح
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q23" value="د" required>
+            <span class="badge">د</span> ملل → اندهاش
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="24" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">24</span>
+            <span class="qtext">الغيرة من نجاح الآخرين تتحول إلى</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q24" value="أ" required>
+            <span class="badge">أ</span> كراهية/إحباط
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q24" value="ب" required>
+            <span class="badge">ب</span> فرح
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q24" value="ج" required>
+            <span class="badge">ج</span> حياد
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q24" value="د" required>
+            <span class="badge">د</span> عدم إدراك
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="25" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">25</span>
+            <span class="qtext">الفرح الشديد قد يؤدي إلى</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q25" value="أ" required>
+            <span class="badge">أ</span> إبداع
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q25" value="ب" required>
+            <span class="badge">ب</span> فقدان الحافز
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q25" value="ج" required>
+            <span class="badge">ج</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q25" value="د" required>
+            <span class="badge">د</span> خوف
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="26" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">26</span>
+            <span class="qtext">أي مشاعر متقاربة أكثر؟</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q26" value="أ" required>
+            <span class="badge">أ</span> حزن &amp; فقدان
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q26" value="ب" required>
+            <span class="badge">ب</span> سعادة &amp; غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q26" value="ج" required>
+            <span class="badge">ج</span> دهشة &amp; ملل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q26" value="د" required>
+            <span class="badge">د</span> فرح &amp; خوف
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="27" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">27</span>
+            <span class="qtext">الحماس الزائد قد يتحول إلى</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q27" value="أ" required>
+            <span class="badge">أ</span> إرهاق
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q27" value="ب" required>
+            <span class="badge">ب</span> هدوء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q27" value="ج" required>
+            <span class="badge">ج</span> ملل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q27" value="د" required>
+            <span class="badge">د</span> لا مبالاة
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="28" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">28</span>
+            <span class="qtext">الغضب قد يقود إلى</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q28" value="أ" required>
+            <span class="badge">أ</span> عدوانية
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q28" value="ب" required>
+            <span class="badge">ب</span> حزن
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q28" value="ج" required>
+            <span class="badge">ج</span> راحة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q28" value="د" required>
+            <span class="badge">د</span> إبداع
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="29" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">29</span>
+            <span class="qtext">التوتر البسيط يختلف عن القلق المزمن في</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q29" value="أ" required>
+            <span class="badge">أ</span> المدة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q29" value="ب" required>
+            <span class="badge">ب</span> النوع
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q29" value="ج" required>
+            <span class="badge">ج</span> التأثير
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q29" value="د" required>
+            <span class="badge">د</span> لا فرق
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="30" data-section="فهم العواطف">
+        <div class="qhead">
+            <span class="qnum">30</span>
+            <span class="qtext">الفرح يتحول إلى حزن عند</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q30" value="أ" required>
+            <span class="badge">أ</span> خيبة أمل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q30" value="ب" required>
+            <span class="badge">ب</span> نجاح
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q30" value="ج" required>
+            <span class="badge">ج</span> دعم اجتماعي
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q30" value="د" required>
+            <span class="badge">د</span> تركيز عالٍ
+        </label>
+        </div>
+    </div>
+    
+    </section>
+    
+
+    <section class="sec">
+        <h2>إدارة العواطف</h2>
+        
+    <div class="question" data-qnum="31" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">31</span>
+            <span class="qtext">فريقك غاضب من ضغط العمل</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q31" value="أ" required>
+            <span class="badge">أ</span> تجاهل
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q31" value="ب" required>
+            <span class="badge">ب</span> لوم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q31" value="ج" required>
+            <span class="badge">ج</span> استماع + خطة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q31" value="د" required>
+            <span class="badge">د</span> زيادة مهام
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="32" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">32</span>
+            <span class="qtext">توتر قبل الامتحان</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q32" value="أ" required>
+            <span class="badge">أ</span> تنفس وتنظيم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q32" value="ب" required>
+            <span class="badge">ب</span> سهر
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q32" value="ج" required>
+            <span class="badge">ج</span> لوم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q32" value="د" required>
+            <span class="badge">د</span> ترك
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="33" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">33</span>
+            <span class="qtext">خيبة أمل بعد رفض</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q33" value="أ" required>
+            <span class="badge">أ</span> تعلم من السبب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q33" value="ب" required>
+            <span class="badge">ب</span> استسلام
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q33" value="ج" required>
+            <span class="badge">ج</span> غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q33" value="د" required>
+            <span class="badge">د</span> إنكار
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="34" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">34</span>
+            <span class="qtext">صديق حزين</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q34" value="أ" required>
+            <span class="badge">أ</span> سخرية
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q34" value="ب" required>
+            <span class="badge">ب</span> تغيير موضوع
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q34" value="ج" required>
+            <span class="badge">ج</span> استماع ودعم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q34" value="د" required>
+            <span class="badge">د</span> تجاهل
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="35" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">35</span>
+            <span class="qtext">إحباط في مشروع طويل</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q35" value="أ" required>
+            <span class="badge">أ</span> أهداف صغيرة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q35" value="ب" required>
+            <span class="badge">ب</span> توقف
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q35" value="ج" required>
+            <span class="badge">ج</span> لوم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q35" value="د" required>
+            <span class="badge">د</span> إنكار
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="36" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">36</span>
+            <span class="qtext">لتقليل القلق الاجتماعي</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q36" value="أ" required>
+            <span class="badge">أ</span> مواجهة تدريجية
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q36" value="ب" required>
+            <span class="badge">ب</span> عزلة
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q36" value="ج" required>
+            <span class="badge">ج</span> غضب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q36" value="د" required>
+            <span class="badge">د</span> إنكار
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="37" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">37</span>
+            <span class="qtext">عند غضبك من خطأ زميل</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q37" value="أ" required>
+            <span class="badge">أ</span> حوار هادئ
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q37" value="ب" required>
+            <span class="badge">ب</span> انفجار
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q37" value="ج" required>
+            <span class="badge">ج</span> صمت عدائي
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q37" value="د" required>
+            <span class="badge">د</span> تجاهل
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="38" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">38</span>
+            <span class="qtext">بعد فشل مهمة</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q38" value="أ" required>
+            <span class="badge">أ</span> مراجعة الأسباب والتعلم
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q38" value="ب" required>
+            <span class="badge">ب</span> لوم الذات المستمر
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q38" value="ج" required>
+            <span class="badge">ج</span> هروب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q38" value="د" required>
+            <span class="badge">د</span> لا مبالاة
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="39" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">39</span>
+            <span class="qtext">عند فرح زائد يعيق العمل</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q39" value="أ" required>
+            <span class="badge">أ</span> تهدئة النفس
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q39" value="ب" required>
+            <span class="badge">ب</span> إنكار
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q39" value="ج" required>
+            <span class="badge">ج</span> استسلام
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q39" value="د" required>
+            <span class="badge">د</span> تجاهل
+        </label>
+        </div>
+    </div>
+    
+
+    <div class="question" data-qnum="40" data-section="إدارة العواطف">
+        <div class="qhead">
+            <span class="qnum">40</span>
+            <span class="qtext">عند قلق شديد قبل مقابلة</span>
+        </div>
+        <div class="options">
+        <label class="option">
+            <input type="radio" name="q40" value="أ" required>
+            <span class="badge">أ</span> تمارين استرخاء
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q40" value="ب" required>
+            <span class="badge">ب</span> انسحاب
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q40" value="ج" required>
+            <span class="badge">ج</span> لوم الآخرين
+        </label>
+        
+
+        <label class="option">
+            <input type="radio" name="q40" value="د" required>
+            <span class="badge">د</span> إنكار
+        </label>
+        </div>
+    </div>
+    
+    </section>
+    
+    <div class="footer">
+      <button type="submit" class="btn">عرض النتائج</button>
+      <button type="button" id="resetBtn" class="btn secondary">إعادة التعيين</button>
+    </div>
+  </form>
+
+  <div id="results" class="results">
+    <h2>نتيجتك</h2>
+    <div class="kpis" id="kpis"></div>
+    <p class="legend"><span>‏% ≥ 80 = ممتاز</span> <span>‏60–79% = جيد</span> <span>‏< 60% = يحتاج تعزيز</span></p>
+    <div id="analysis" class="note"></div>
+  </div>
+
+  <div class="admin" id="adminPanel">
+    <h3>إدخال/تعديل مفتاح الإجابة (يُحفظ داخل الصفحة عند الضغط على "حفظ")</h3>
+    <div class="alert-inline">ملحوظة: إن لم تضف مفتاح الإجابة، سيعرض النظام التحليل دون احتساب الصحة/الخطأ.</div>
+    <div id="adminGrid" class="grid"></div>
+    <div style="margin-top:8px; display:flex; gap:8px;">
+      <button id="saveKey" class="btn" type="button">حفظ المفتاح داخل الصفحة</button>
+      <button id="closeAdmin" class="btn secondary" type="button">إغلاق</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== البيانات المولدة من ملف Excel =====
+window.QUESTIONS = [{"number": 1, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "شخص يبتسم ابتسامة واسعة مع عيون ضيقة", "options": [{"letter": "أ", "text": "غضب"}, {"letter": "ب", "text": "فرح"}, {"letter": "ج", "text": "ملل"}, {"letter": "د", "text": "حزن"}]}, {"number": 2, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "شخص عابس، كتفاه للأسفل وصوته منخفض", "options": [{"letter": "أ", "text": "توتر"}, {"letter": "ب", "text": "سعادة"}, {"letter": "ج", "text": "حزن"}, {"letter": "د", "text": "اندهاش"}]}, {"number": 3, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "اللون الأحمر غالبًا يرتبط بـ", "options": [{"letter": "أ", "text": "هدوء"}, {"letter": "ب", "text": "غضب/حماس"}, {"letter": "ج", "text": "حزن"}, {"letter": "د", "text": "لا مبالاة"}]}, {"number": 4, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "طفل يبكي ويبتسم في الوقت ذاته", "options": [{"letter": "أ", "text": "فرح"}, {"letter": "ب", "text": "مشاعر مختلطة"}, {"letter": "ج", "text": "غضب"}, {"letter": "د", "text": "خوف"}]}, {"number": 5, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "موسيقى سريعة بإيقاع قوي", "options": [{"letter": "أ", "text": "نشاط"}, {"letter": "ب", "text": "هدوء"}, {"letter": "ج", "text": "خوف"}, {"letter": "د", "text": "ملل"}]}, {"number": 6, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "نظرة شخص حادة مع قبضة مشدودة", "options": [{"letter": "أ", "text": "فرح"}, {"letter": "ب", "text": "غضب"}, {"letter": "ج", "text": "دهشة"}, {"letter": "د", "text": "ملل"}]}, {"number": 7, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "شخص جالس، رأسه للأرض، أنفاسه ثقيلة", "options": [{"letter": "أ", "text": "استرخاء"}, {"letter": "ب", "text": "توتر"}, {"letter": "ج", "text": "حزن"}, {"letter": "د", "text": "ثقة"}]}, {"number": 8, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "اللون الأزرق الداكن غالبًا يوحي بـ", "options": [{"letter": "أ", "text": "حزن"}, {"letter": "ب", "text": "غضب"}, {"letter": "ج", "text": "اندهاش"}, {"letter": "د", "text": "لا مبالاة"}]}, {"number": 9, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "نبرة صوت عالية وسريعة قد تشير إلى", "options": [{"letter": "أ", "text": "توتر أو غضب"}, {"letter": "ب", "text": "ملل"}, {"letter": "ج", "text": "فرح"}, {"letter": "د", "text": "ارتباك"}]}, {"number": 10, "section": "أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟", "text": "مشهد غروب مع موسيقى حزينة يوحي بـ", "options": [{"letter": "أ", "text": "راحة"}, {"letter": "ب", "text": "حزن"}, {"letter": "ج", "text": "طاقة"}, {"letter": "د", "text": "فرح"}]}, {"number": 11, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "أي شعور يساعدك على كتابة قصة إبداعية؟", "options": [{"letter": "أ", "text": "الفضول"}, {"letter": "ب", "text": "الغضب"}, {"letter": "ج", "text": "لا مبالاة"}, {"letter": "د", "text": "خوف"}]}, {"number": 12, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "لاتخاذ قرار مالي مهم", "options": [{"letter": "أ", "text": "الحماس الزائد"}, {"letter": "ب", "text": "الهدوء"}, {"letter": "ج", "text": "حزن"}, {"letter": "د", "text": "غضب"}]}, {"number": 13, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "الدهشة غالبًا تدفع إلى", "options": [{"letter": "أ", "text": "التعلم"}, {"letter": "ب", "text": "الانطواء"}, {"letter": "ج", "text": "تجاهل التفاصيل"}, {"letter": "د", "text": "القلق"}]}, {"number": 14, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "للتحفيز الرياضي", "options": [{"letter": "أ", "text": "ملل"}, {"letter": "ب", "text": "حماس"}, {"letter": "ج", "text": "خوف"}, {"letter": "د", "text": "حزن"}]}, {"number": 15, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "لحل مشكلة منطقية", "options": [{"letter": "أ", "text": "هدوء"}, {"letter": "ب", "text": "فرح مفرط"}, {"letter": "ج", "text": "غضب"}, {"letter": "د", "text": "لا مبالاة"}]}, {"number": 16, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "عند الحاجة للابتكار التقني، أي شعور أنسب؟", "options": [{"letter": "أ", "text": "فضول"}, {"letter": "ب", "text": "إحباط"}, {"letter": "ج", "text": "ملل"}, {"letter": "د", "text": "غضب"}]}, {"number": 17, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "أي عاطفة تضعف التفكير الواقعي؟", "options": [{"letter": "أ", "text": "قلق بسيط"}, {"letter": "ب", "text": "غضب عارم"}, {"letter": "ج", "text": "فضول"}, {"letter": "د", "text": "حماس معتدل"}]}, {"number": 18, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "السعادة المعتدلة تساعد في", "options": [{"letter": "أ", "text": "اتخاذ قرارات تفاعلية"}, {"letter": "ب", "text": "تجنب التعاون"}, {"letter": "ج", "text": "العزلة"}, {"letter": "د", "text": "فقدان الحافز"}]}, {"number": 19, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "القلق البسيط قبل الامتحان قد يؤدي إلى", "options": [{"letter": "أ", "text": "تركيز"}, {"letter": "ب", "text": "انهيار"}, {"letter": "ج", "text": "لا مبالاة"}, {"letter": "د", "text": "كسل"}]}, {"number": 20, "section": "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟", "text": "الحزن الخفيف أحيانًا يزيد من", "options": [{"letter": "أ", "text": "الانتباه للتفاصيل"}, {"letter": "ب", "text": "الإهمال"}, {"letter": "ج", "text": "الاسترخاء"}, {"letter": "د", "text": "سرعة الإنجاز"}]}, {"number": 21, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "قلق قبل عرض → ارتياح بعده", "options": [{"letter": "أ", "text": "تطور طبيعي"}, {"letter": "ب", "text": "إنكار"}, {"letter": "ج", "text": "سوء فهم"}, {"letter": "د", "text": "خلط"}]}, {"number": 22, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "إحباط يتحول إلى يأس طويل الأمد", "options": [{"letter": "أ", "text": "انتقال"}, {"letter": "ب", "text": "تضخيم"}, {"letter": "ج", "text": "تراكم"}, {"letter": "د", "text": "إدارة"}]}, {"number": 23, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "أي تسلسل منطقي؟", "options": [{"letter": "أ", "text": "دهشة → خوف → حذر"}, {"letter": "ب", "text": "سعادة → قلق → نوم"}, {"letter": "ج", "text": "غضب → فرح"}, {"letter": "د", "text": "ملل → اندهاش"}]}, {"number": 24, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "الغيرة من نجاح الآخرين تتحول إلى", "options": [{"letter": "أ", "text": "كراهية/إحباط"}, {"letter": "ب", "text": "فرح"}, {"letter": "ج", "text": "حياد"}, {"letter": "د", "text": "عدم إدراك"}]}, {"number": 25, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "الفرح الشديد قد يؤدي إلى", "options": [{"letter": "أ", "text": "إبداع"}, {"letter": "ب", "text": "فقدان الحافز"}, {"letter": "ج", "text": "حزن"}, {"letter": "د", "text": "خوف"}]}, {"number": 26, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "أي مشاعر متقاربة أكثر؟", "options": [{"letter": "أ", "text": "حزن & فقدان"}, {"letter": "ب", "text": "سعادة & غضب"}, {"letter": "ج", "text": "دهشة & ملل"}, {"letter": "د", "text": "فرح & خوف"}]}, {"number": 27, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "الحماس الزائد قد يتحول إلى", "options": [{"letter": "أ", "text": "إرهاق"}, {"letter": "ب", "text": "هدوء"}, {"letter": "ج", "text": "ملل"}, {"letter": "د", "text": "لا مبالاة"}]}, {"number": 28, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "الغضب قد يقود إلى", "options": [{"letter": "أ", "text": "عدوانية"}, {"letter": "ب", "text": "حزن"}, {"letter": "ج", "text": "راحة"}, {"letter": "د", "text": "إبداع"}]}, {"number": 29, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "التوتر البسيط يختلف عن القلق المزمن في", "options": [{"letter": "أ", "text": "المدة"}, {"letter": "ب", "text": "النوع"}, {"letter": "ج", "text": "التأثير"}, {"letter": "د", "text": "لا فرق"}]}, {"number": 30, "section": "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟", "text": "الفرح يتحول إلى حزن عند", "options": [{"letter": "أ", "text": "خيبة أمل"}, {"letter": "ب", "text": "نجاح"}, {"letter": "ج", "text": "دعم اجتماعي"}, {"letter": "د", "text": "تركيز عالٍ"}]}, {"number": 31, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "فريقك غاضب من ضغط العمل", "options": [{"letter": "أ", "text": "تجاهل"}, {"letter": "ب", "text": "لوم"}, {"letter": "ج", "text": "استماع + خطة"}, {"letter": "د", "text": "زيادة مهام"}]}, {"number": 32, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "توتر قبل الامتحان", "options": [{"letter": "أ", "text": "تنفس وتنظيم"}, {"letter": "ب", "text": "سهر"}, {"letter": "ج", "text": "لوم"}, {"letter": "د", "text": "ترك"}]}, {"number": 33, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "خيبة أمل بعد رفض", "options": [{"letter": "أ", "text": "تعلم من السبب"}, {"letter": "ب", "text": "استسلام"}, {"letter": "ج", "text": "غضب"}, {"letter": "د", "text": "إنكار"}]}, {"number": 34, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "صديق حزين", "options": [{"letter": "أ", "text": "سخرية"}, {"letter": "ب", "text": "تغيير موضوع"}, {"letter": "ج", "text": "استماع ودعم"}, {"letter": "د", "text": "تجاهل"}]}, {"number": 35, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "إحباط في مشروع طويل", "options": [{"letter": "أ", "text": "أهداف صغيرة"}, {"letter": "ب", "text": "توقف"}, {"letter": "ج", "text": "لوم"}, {"letter": "د", "text": "إنكار"}]}, {"number": 36, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "لتقليل القلق الاجتماعي", "options": [{"letter": "أ", "text": "مواجهة تدريجية"}, {"letter": "ب", "text": "عزلة"}, {"letter": "ج", "text": "غضب"}, {"letter": "د", "text": "إنكار"}]}, {"number": 37, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "عند غضبك من خطأ زميل", "options": [{"letter": "أ", "text": "حوار هادئ"}, {"letter": "ب", "text": "انفجار"}, {"letter": "ج", "text": "صمت عدائي"}, {"letter": "د", "text": "تجاهل"}]}, {"number": 38, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "بعد فشل مهمة", "options": [{"letter": "أ", "text": "مراجعة الأسباب والتعلم"}, {"letter": "ب", "text": "لوم الذات المستمر"}, {"letter": "ج", "text": "هروب"}, {"letter": "د", "text": "لا مبالاة"}]}, {"number": 39, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "عند فرح زائد يعيق العمل", "options": [{"letter": "أ", "text": "تهدئة النفس"}, {"letter": "ب", "text": "إنكار"}, {"letter": "ج", "text": "استسلام"}, {"letter": "د", "text": "تجاهل"}]}, {"number": 40, "section": "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟", "text": "عند قلق شديد قبل مقابلة", "options": [{"letter": "أ", "text": "تمارين استرخاء"}, {"letter": "ب", "text": "انسحاب"}, {"letter": "ج", "text": "لوم الآخرين"}, {"letter": "د", "text": "إنكار"}]}];
+window.ANSWER_KEY = {"1": "ب", "2": "ج", "3": "ب", "4": "ب", "5": "أ", "6": "ب", "7": "ج", "8": "أ", "9": "أ", "10": "ب", "11": "أ", "12": "ب", "13": "أ", "14": "ب", "15": "أ", "16": "أ", "17": "ب", "18": "أ", "19": "أ", "20": "أ", "21": "أ", "22": "ج", "23": "أ", "24": "أ", "25": "أ", "26": "أ", "27": "أ", "28": "أ", "29": "أ", "30": "أ", "31": "ج", "32": "أ", "33": "أ", "34": "ج", "35": "أ", "36": "أ", "37": "أ", "38": "أ", "39": "أ", "40": "أ"}; // ضع الحرف الصحيح لكل سؤال (أ/ب/ج/د)
+window.SECTION_LABELS = {"أولاً:إدراك العواطف: ماذا تعني لك المواقف أو المشاعر التالية؟ وكيف تفسرها من خلال ملامح الوجه، نبرة الصوت، الألوان، أو الأجواء؟": "إدراك العواطف", "ثانياً: استخدام العواطف: كيف يمكن للمشاعر التالية أن تدعم تفكيرك أو إبداعك أو قراراتك؟": "استخدام العواطف", "ثالثاً: فهم العواطف: كيف تفهم تطور المشاعر التالية وتحولها من حالة إلى أخرى مع مرور الوقت أو المواقف؟": "فهم العواطف", "رابعاً: إدارة العواطف: كيف يمكنك ضبط مشاعرك أو التعامل مع مشاعر الآخرين في المواقف التالية لتحقيق أفضل استجابة؟": "إدارة العواطف"};
+
+// ===== وظائف مساعدة =====
+function summarize(scores) {
+  // scores: { totalCorrect, totalPossible, bySection: {label: {correct, total}} }
+  const pct = (a,b) => b ? Math.round((a/b)*100) : 0;
+  const overall = pct(scores.totalCorrect, scores.totalPossible);
+  const kpis = [];
+  for (const [label, obj] of Object.entries(scores.bySection)) {
+    const p = pct(obj.correct, obj.total);
+    let cls = 'bad'; if (p>=80) cls='ok'; else if (p>=60) cls='mid';
+    kpis.push(`
+      <div class="kpi ${cls}">
+        <div class="label">${label}</div>
+        <div class="value">${p}%</div>
+        <div class="small">(${obj.correct} / ${obj.total} صحيح)</div>
+      </div>
+    `);
+  }
+  const kpisHtml = kpis.join('');
+  document.getElementById('kpis').innerHTML = kpisHtml + 
+    `<div class="kpi" style="grid-column: 1/-1;">
+        <div class="label">المجموع العام</div>
+        <div class="value">${overall}%</div>
+        <div class="small">(${scores.totalCorrect} / ${scores.totalPossible} صحيح)</div>
+     </div>`;
+
+  const advice = [];
+  for (const [label, obj] of Object.entries(scores.bySection)) {
+    const p = pct(obj.correct, obj.total);
+    if (p >= 80) advice.push(`٪${p} في <b>${label}</b>: أداء ممتاز — استمر بالممارسة.`);
+    else if (p >= 60) advice.push(`٪${p} في <b>${label}</b>: جيد — طوّر مهاراتك بتمارين إضافية.`);
+    else advice.push(`٪${p} في <b>${label}</b>: يحتاج تعزيز — راجع الأساسيات وطبّق استراتيجيات عملية.`);
+  }
+  document.getElementById('analysis').innerHTML = advice.join('<br>');
+}
+
+function collectAnswers() {
+  const answers = {};
+  for (const q of window.QUESTIONS) {
+    const el = document.querySelector(`input[name="q${q.number}"]:checked`);
+    answers[q.number] = el ? el.value : null;
+  }
+  return answers;
+}
+
+function grade(answers) {
+  const key = window.ANSWER_KEY || {};
+  const scores = { totalCorrect: 0, totalPossible: 0, bySection: {} };
+  // init bySection
+  for (const sec of Object.values(window.SECTION_LABELS)) {
+    scores.bySection[sec] = { correct:0, total:0 };
+  }
+  for (const q of window.QUESTIONS) {
+    const sec = window.SECTION_LABELS[q.section] || q.section;
+    const correctLetter = key[q.number];
+    if (correctLetter) {
+      scores.totalPossible += 1;
+      scores.bySection[sec].total += 1;
+      if (answers[q.number] === correctLetter) {
+        scores.totalCorrect += 1;
+        scores.bySection[sec].correct += 1;
+      }
+    } else {
+      // لو المفتاح غير متوفر، نعرض التحليل كسلة فارغة (لن يؤثر على النسبة)
+      // يمكن لاحقاً وضع مفتاح الإجابة لتفعيل التصحيح.
+    }
+  }
+  return scores;
+}
+
+function ensureAllAnswered() {
+  const unanswered = [];
+  for (const q of window.QUESTIONS) {
+    const el = document.querySelector(`input[name="q${q.number}"]:checked`);
+    if (!el) unanswered.push(q.number);
+  }
+  return unanswered;
+}
+
+// ===== واجهة المستخدم =====
+document.getElementById('quiz').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const missing = ensureAllAnswered();
+  if (missing.length) {
+    alert('الرجاء الإجابة على جميع الأسئلة قبل عرض النتائج.');
+    return;
+  }
+  const answers = collectAnswers();
+  const scores = grade(answers);
+  document.getElementById('results').style.display = 'block';
+  summarize(scores);
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('quiz').reset();
+  document.getElementById('results').style.display = 'none';
+});
+
+// ===== لوحة إدخال مفتاح الإجابة (Alt+M) =====
+const admin = document.getElementById('adminPanel');
+const adminGrid = document.getElementById('adminGrid');
+
+function buildAdmin() {
+  adminGrid.innerHTML = '';
+  const letters = ['أ','ب','ج','د'];
+  for (const q of window.QUESTIONS) {
+    const row = document.createElement('div');
+    row.className = 'row';
+    const label = document.createElement('div');
+    label.textContent = `س${q.number}: `;
+    label.style.minWidth = '60px';
+    const select = document.createElement('select');
+    for (const L of letters) {
+      const opt = document.createElement('option');
+      opt.value = L; opt.textContent = L;
+      select.appendChild(opt);
+    }
+    const current = window.ANSWER_KEY[q.number];
+    if (current) select.value = current;
+    else select.value = '';
+    const empty = document.createElement('option');
+    empty.value = ''; empty.textContent = '—';
+    select.insertBefore(empty, select.firstChild);
+    select.addEventListener('change', () => {
+      window.ANSWER_KEY[q.number] = select.value || null;
+    });
+    row.appendChild(label);
+    row.appendChild(select);
+    const qtext = document.createElement('div');
+    qtext.textContent = q.text;
+    qtext.style.flex = '1';
+    qtext.style.whiteSpace = 'nowrap';
+    qtext.style.overflow = 'hidden';
+    qtext.style.textOverflow = 'ellipsis';
+    row.appendChild(qtext);
+    adminGrid.appendChild(row);
+  }
+}
+
+document.addEventListener('keydown', (ev) => {
+  if (ev.altKey && (ev.key === 'م' || ev.key.toLowerCase() === 'm')) {
+    admin.style.display = admin.style.display === 'none' || admin.style.display === '' ? 'block' : 'none';
+    if (admin.style.display === 'block') buildAdmin();
+  }
+});
+
+document.getElementById('closeAdmin').addEventListener('click', () => {
+  admin.style.display = 'none';
+});
+
+document.getElementById('saveKey').addEventListener('click', () => {
+  // حقن المفتاح داخل كود الصفحة (استبدال JSON في window.ANSWER_KEY)
+  const serialized = JSON.stringify(window.ANSWER_KEY, null, 2);
+  const html = document.documentElement.outerHTML.replace(/window\.ANSWER_KEY\s*=\s*\{[\s\S]*?\};/, `window.ANSWER_KEY = ${serialized};`);
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'اختبار_الذكاء_العاطفي_MSCEIT_like.html';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 500);
+  alert('تم إنشاء نسخة من الصفحة تتضمن مفتاح الإجابة المحدّث (سيتم تنزيلها الآن).');
+});
+</script>
+</body>
+</html>
+
+<style>
+.option:hover { border-color:#475569; background:#0f1a2b; }
+.option:has(input[type=radio]:checked) { border-color:#38bdf8; background:#0b2335; }
+.qhead .qtext { color: var(--ink); }
+</style>
